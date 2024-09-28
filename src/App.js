@@ -12,7 +12,14 @@ const App = () => {
     <>
       <CssBaseline />
       <Header />
-      <Grid2 container spacing={3} style={{ width: "100%" }}></Grid2>
+      <Grid2 container spacing={3} sx={{ width: "100%" }}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <List />
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 8 }}>
+          <Map />
+        </Grid2>
+      </Grid2>
     </>
   );
 };
