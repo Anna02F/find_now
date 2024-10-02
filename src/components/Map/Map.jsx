@@ -1,11 +1,12 @@
 import React from "react";
-import googleMapReact from "google-map-react";
+import GoogleMapReact from "google-map-react";
 import {
   useTheme,
   Paper,
   Typography,
   useMediaQuery,
   Rating,
+  Box,
 } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
@@ -15,8 +16,8 @@ const Map = () => {
   const coordinates = { lat: 0, lng: 0 };
   return (
     <Box sx={{ height: "100vh", width: "100%" }}>
-      <googleMapReact
-        bootstrapURLKeys={{ key: "" }}
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "AIzaSyDfrt3F07kqfC8CL3cFTeeUn8vYRRL-uxk" }}
         defaultCenter={coordinates}
         center={coordinates}
         defaultZoom={11}
@@ -24,7 +25,7 @@ const Map = () => {
         options={""}
         onChange={""}
         onChildClick={""}
-      ></googleMapReact>
+      ></GoogleMapReact>
     </Box>
   );
 };
