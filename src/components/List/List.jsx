@@ -10,12 +10,36 @@ import {
   Select,
 } from "@mui/material";
 
+import PlaceDetails from "../PlaceDetails/PlaceDetails";
+
 const List = () => {
   const [category, setCategory] = useState("restaurants");
   const [rating, setRating] = useState(0);
+
+  // To be Fetched from API
+  const places = [
+    {
+      name: "place1",
+    },
+    {
+      name: "place2",
+    },
+    {
+      name: "place3",
+    },
+    {
+      name: "place4",
+    },
+    {
+      name: "place5",
+    },
+    {
+      name: "place6",
+    },
+  ];
   return (
     <Box>
-      <Typography variant="h4">
+      <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
         Nearby Restaurants, Hotels and Attractions
       </Typography>
       <Box
@@ -23,7 +47,7 @@ const List = () => {
           display: "flex",
           width: "15rem",
           justifyContent: "space-between",
-          marginTop: "1.5rem",
+          margin: "1.5rem 0",
         }}
       >
         <FormControl sx={{ maxwidth: "50%", minwidth: "fit-content" }}>
@@ -56,6 +80,13 @@ const List = () => {
           </Select>
         </FormControl>
       </Box>
+      <Grid2 container>
+        {places?.map((place, i) => (
+          <Grid2 key={i} size={{ xs: 12 }} sx={{ margin: "1rem" }}>
+            <PlaceDetails place={place} />
+          </Grid2>
+        ))}
+      </Grid2>
     </Box>
   );
 };
