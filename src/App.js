@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Grid2, Box } from "@mui/material";
 
@@ -7,7 +7,19 @@ import List from "./components/List/List";
 import Map from "./components/Map/Map";
 import PlaceDetails from "./components/PlaceDetails/PlaceDetails";
 
+import { getPlacesData } from "./api";
+
 const App = () => {
+  const [places, setPlaces] = useState([]);
+
+  console.log("places", places);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getPlacesData();
+      setPlaces(data);
+    })();
+  }, []);
   return (
     <Box sx={{ padding: "0 0.5rem 0.5rem 1.5rem" }}>
       <Header />

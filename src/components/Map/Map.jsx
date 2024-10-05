@@ -23,8 +23,8 @@ const Map = () => {
         defaultZoom={11}
         margin={[50, 50, 50, 50]}
         options={""}
-        onChange={""}
-        onChildClick={""}
+        // onChange={""}
+        // onChildClick={""}
       ></GoogleMapReact>
     </Box>
   );
