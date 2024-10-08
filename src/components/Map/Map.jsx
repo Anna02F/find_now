@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
-const Map = () => {
+const Map = ({ setCoordinates, setBounds, coordinates }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
-  const coordinates = { lat: 0, lng: 0 };
+
   return (
     <Box sx={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
@@ -23,8 +23,11 @@ const Map = () => {
         defaultZoom={11}
         margin={[50, 50, 50, 50]}
         options={""}
-        // onChange={""}
-        // onChildClick={""}
+        onChange={(e) => {
+          setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+        }}
+        onChildClick={""}
       ></GoogleMapReact>
     </Box>
   );

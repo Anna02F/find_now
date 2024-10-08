@@ -12,31 +12,10 @@ import {
 
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const List = () => {
+const List = ({ places }) => {
   const [category, setCategory] = useState("restaurants");
   const [rating, setRating] = useState(0);
 
-  // To be Fetched from API
-  const places = [
-    {
-      name: "place1",
-    },
-    {
-      name: "place2",
-    },
-    {
-      name: "place3",
-    },
-    {
-      name: "place4",
-    },
-    {
-      name: "place5",
-    },
-    {
-      name: "place6",
-    },
-  ];
   return (
     <Box>
       <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
