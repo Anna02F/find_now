@@ -12,7 +12,7 @@ import { getPlacesData } from "./api";
 const App = () => {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState({});
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -23,12 +23,12 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getPlacesData(bounds?.sw, bounds?.ne);
+      const data = await getPlacesData(bounds.sw, bounds.ne);
       setPlaces(data);
     })();
   }, [coordinates, bounds]);
-  console.log("bounds", bounds);
-  console.log("places", places);
+  // console.log("bounds", bounds);
+  // console.log("places", places);
   return (
     <Box sx={{ padding: "0 0.5rem 0.5rem 1.5rem" }}>
       <Header />
