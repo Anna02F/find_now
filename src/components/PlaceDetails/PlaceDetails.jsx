@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  Link,
   Typography,
   Button,
   Card,
@@ -13,13 +12,14 @@ import {
 } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 const PlaceDetails = ({ place }) => {
   console.log("place", place);
   const validPlace = place?.name ?? false;
   return (
     validPlace && (
-      <Card elevation={6} sx={{ maxWidth: "80%" }}>
+      <Card elevation={6}>
         <CardMedia
           sx={{ height: "20rem" }}
           image={
@@ -34,52 +34,71 @@ const PlaceDetails = ({ place }) => {
             gutterBottom
             variant="h5"
             component="h2"
-            sx={{ fontWeight: "bold" }}
+            sx={{ fontWeight: "bold", mb: 2 }}
           >
             {place?.name}
           </Typography>
-          <Box
-            sx={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}
-          >
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="subtitle1">Price</Typography>
-              <Typography variant="subtitle1">{place?.price_level}</Typography>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="subtitle1">Ranking</Typography>
-              <Typography variant="subtitle1">{place?.ranking}</Typography>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              {place?.cuisine?.length > 0 && (
-                <Typography variant="subtitle1">
-                  {`${place.cuisine[0]?.name}`}
-                </Typography>
-              )}
-              {place?.website && <Link href={place.website}>Website</Link>}
-            </Box>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: ".5rem" }}>
+
+          {/* Rating and Price Level */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+            <Rating value={Number(place?.rating)} readOnly />
+            <Typography variant="subtitle1" color="textSecondary">
+              {place?.price_level}
+            </Typography>
+          </Box>
+
+          {/* Ranking */}
+          <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>
+            {place?.ranking}
+          </Typography>
+
+          {/* Cuisine Chips */}
+          {place?.cuisine?.length > 0 && (
+            <Box
+              sx={{ display: "flex", flexWrap: "wrap", gap: ".5rem", mb: 2 }}
+            >
               {place?.cuisine?.map((item) => (
                 <Chip key={item.name} size="small" label={item.name} />
               ))}
             </Box>
-            {place?.address && (
-              <Typography variant="subtitle2" sx={{ display: "flex" }}>
-                <LocationOnIcon />
+          )}
+
+          {/* Address */}
+          {place?.address && (
+            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+              <LocationOnIcon color="action" sx={{ mr: 1 }} />
+              <Typography variant="body2" color="textSecondary">
                 {place.address}
               </Typography>
-            )}
-            {place?.phone && (
-              <Typography
-                gutterBottom
-                variant="subtitle2"
-                sx={{ display: "flex", rowGap: "1rem" }}
-              >
-                <PhoneIcon />
+            </Box>
+          )}
+
+          {/* Phone */}
+          {place?.phone && (
+            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+              <PhoneIcon color="action" sx={{ mr: 1 }} />
+              <Typography variant="body2" color="textSecondary">
                 {place.phone}
               </Typography>
-            )}
-          </Box>
+            </Box>
+          )}
+
+          {/* Open Now Status */}
+          {place?.open_now_text && (
+            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+              <AccessTimeIcon color="action" sx={{ mr: 1 }} />
+              <Typography
+                variant="body2"
+                sx={{
+                  color: place.is_closed ? "error.main" : "success.main",
+                }}
+              >
+                {place.open_now_text}
+              </Typography>
+            </Box>
+          )}
         </CardContent>
+
         <CardActions>
           <Button
             size="small"

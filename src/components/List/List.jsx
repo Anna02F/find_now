@@ -17,7 +17,7 @@ const List = ({ places }) => {
   const [rating, setRating] = useState(0);
 
   return (
-    <Box>
+    <Box sx={{ maxHeight: "100%", overflowY: "auto" }}>
       <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
         Nearby Restaurants, Hotels and Attractions
       </Typography>
@@ -61,7 +61,7 @@ const List = ({ places }) => {
       </Box>
       <Grid2 container>
         {places?.map((place, i) => (
-          <Grid2 key={i} size={{ xs: 12 }} sx={{ margin: "1rem" }}>
+          <Grid2 key={i} size={{ xs: 12 }} sx={{ my: "1rem" }}>
             <PlaceDetails place={place} />
           </Grid2>
         ))}

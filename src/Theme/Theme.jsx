@@ -15,6 +15,12 @@ const theme = createTheme({
       dark: "#C68400",
       contrastText: "#000",
     },
+    success: {
+      main: "#4caf50",
+    },
+    warning: {
+      main: "#e65100",
+    },
     accent: {
       main: "#FF7043",
       contrastText: "#FFFFFF",

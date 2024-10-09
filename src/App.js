@@ -30,13 +30,13 @@ const App = () => {
   // console.log("bounds", bounds);
   // console.log("places", places);
   return (
-    <Box sx={{ padding: "0 0.5rem 0.5rem 1.5rem" }}>
+    <Box sx={{ padding: "0 0 1rem 1.5rem" }}>
       <Header />
-      <Grid2 container spacing={3} sx={{ width: "100%" }}>
-        <Grid2 size={{ xs: 12, md: 4 }} sx={{ pt: "5rem" }}>
+      <Grid2 container spacing={3} sx={{ width: "100%", height: "100vh" }}>
+        <Grid2 size={{ xs: 12, md: 3 }} sx={{ pt: "5rem", height: "99%" }}>
           <List places={places} />
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 8 }} sx={{ pt: "5rem" }}>
+        <Grid2 size={{ xs: 12, md: 9 }} sx={{ pt: "5rem", height: "99%" }}>
           <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}
