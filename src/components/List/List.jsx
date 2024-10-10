@@ -8,11 +8,12 @@ import {
   MenuItem,
   FormControl,
   Select,
+  Alert,
 } from "@mui/material";
 
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const List = ({ places }) => {
+const List = ({ places, error, loading }) => {
   const [category, setCategory] = useState("restaurants");
   const [rating, setRating] = useState(0);
 
@@ -60,6 +61,8 @@ const List = ({ places }) => {
         </FormControl>
       </Box>
       <Grid2 container>
+        {loading && <CircularProgress color="primary" />}
+        {error && <Alert severity="error">Sorry, something went wrong</Alert>}
         {places?.map((place, i) => (
           <Grid2 key={i} size={{ xs: 12 }} sx={{ my: "1rem" }}>
             <PlaceDetails place={place} />
