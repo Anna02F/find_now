@@ -11,7 +11,10 @@ export const getPlacesData = async (sw, ne) => {
 
     const response = await fetch(URL, {
       method: "GET",
-      headers: {},
+      headers: {
+        "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
+        "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
+      },
     });
     // Check for errors
     if (!response.ok) {
