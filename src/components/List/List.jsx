@@ -62,7 +62,7 @@ const List = ({ places, error, loading }) => {
       </Box>
       <Grid2 container>
         {loading && <CircularProgress color="primary" />}
-        {error && <Alert severity="error">Sorry, something went wrong</Alert>}
+        {error && <Alert severity="error">{error}</Alert>}
         {places?.map((place, i) => (
           <Grid2 key={i} size={{ xs: 12 }} sx={{ my: "1rem" }}>
             <PlaceDetails place={place} />

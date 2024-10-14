@@ -15,7 +15,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 const PlaceDetails = ({ place }) => {
-  console.log("place", place);
   const validPlace = place?.name ?? false;
   return (
     validPlace && (

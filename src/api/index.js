@@ -18,22 +18,22 @@ export const getPlacesData = async (sw, ne) => {
     });
     // Check for errors
     if (!response.ok) {
-      //console.error(`Server returned: ${response.status}`);
-      const errorMessage = `Error: ${response.statusText} (Status: ${response.status})`;
-      return { data: null, error: errorMessage };
+      console.error(`An error has occured: ${response.status}`);
+      // const errorMessage = `Error: ${response.statusText} (Status: ${response.status})`;
+      // return { data: null, error: errorMessage };
     }
     const { data } = await response.json();
 
     if (!data) {
-      // console.error("No data returned from the API");
-      return { data: null, error: "No data returned from the API" };
+      console.error("No data returned from the API");
+      // return { data: null, error: "No data returned from the API" };
     }
     // Store data in the cache and return it
     cache[cacheKey] = data;
 
-    return { data, error: null };
+    return data;
   } catch (e) {
-    //console.error(`There was a problem with the Fetch request:, ${e}`);
-    return { data: null, error: `Fetch failed: ${e.message}` };
+    console.error(`There was a problem with the Fetch request:, ${e}`);
+    //return { data: null, error: `Fetch failed: ${e.message}` };
   }
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 
 import { Grid2, Box, CircularProgress } from "@mui/material";
 
@@ -16,7 +16,7 @@ const App = () => {
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
       const { latitude, longitude } = coords;
       setCoordinates({ lat: latitude, lng: longitude });
@@ -28,15 +28,18 @@ const App = () => {
       const fetchPlaces = async () => {
         setLoading(true);
         setError(null);
-        const { data, error } = await getPlacesData(bounds.sw, bounds.ne);
-        if (error) {
-          setError(error);
-          setPlaces([]);
-        } else {
-          setPlaces(data);
-        }
 
-        setLoading(false);
+        try {
+          console.log("fetching data");
+          const data = await getPlacesData(bounds.sw, bounds.ne);
+          if (data?.length > 0) {
+            setPlaces(data);
+          }
+        } catch (error) {
+          setError("Error fetching places data");
+        } finally {
+          setLoading(false);
+        }
       };
       fetchPlaces();
     }
@@ -47,14 +50,16 @@ const App = () => {
     <Box sx={{ padding: "0 0 1rem 1.5rem" }}>
       <Header />
       <Grid2 container spacing={3} sx={{ width: "100%", height: "100vh" }}>
-        <Grid2 size={{ xs: 12, md: 3 }} sx={{ pt: "5rem", height: "99%" }}>
+        <Grid2 size={{ xs: 12, md: 3 }} sx={{ pt: "5rem", height: "98%" }}>
           <List places={places} error={error} loading={loading} />
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 9 }} sx={{ pt: "5rem", height: "99%" }}>
+        <Grid2 size={{ xs: 12, md: 9 }} sx={{ pt: "5rem", height: "98%" }}>
           <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
+            places={places}
+            bounds={bounds}
           />
         </Grid2>
       </Grid2>
